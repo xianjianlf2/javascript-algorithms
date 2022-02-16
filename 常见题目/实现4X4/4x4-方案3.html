@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+      ;(function () {
+        var arr = [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]
+        var div = document.getElementById('container')
+        for (var r = 0; r < 4; r++) {
+          for (var c = 0; c < 4; c++) {
+            var cell = document.createElement('div')
+            cell.innerText = `(${r},${c})`
+            cell.onclick = (function (r, c) {
+              return function () {
+                arr[r][c]++
+                alert(`点击了${arr[r][c]}次`)
+              }
+            })(r, c) //将外部循环过程中r,c的值传入
+            div.appendChild(cell)
+          }
+        }
+      })()
+    </script>
+  </body>
+  <style>
+    #container {
+      width: 200px;
+      height: 200px;
+      border-radius: 5px;
+      background: purple;
+    }
+    /* 40*4+8*5=200 */
+    #container > div {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      margin-top: 8px;
+      margin-left: 8px;
+      /* 把格子横过来，且超出的格子，自动换行 */
+      float: left;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</html>

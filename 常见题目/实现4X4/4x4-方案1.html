@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 动态生成4*4表格，每个表格中有坐标(0,0)-(3,3)点击格子增加次数，且每个格子互不干扰 (闭包），次数通过弹窗显示 -->
+    <div id="container"></div>
+
+    <script>
+      var div = document.getElementById('container')
+      for (var r = 0; r < 4; r++) {
+        for (var c = 0; c < 4; c++) {
+          var cell = document.createElement('div')
+          cell.innerText = `(${r},${c})`
+          cell.onclick = (function () {
+            var n = 0
+            return function () {
+              n++
+              alert(`点击了${n}次`)
+            }
+          })()
+          div.appendChild(cell)
+        }
+      }
+    </script>
+  </body>
+  <style>
+    #container {
+      width: 200px;
+      height: 200px;
+      border-radius: 5px;
+      background: purple;
+    }
+    /* 40*4+8*5=200 */
+    #container > div {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      margin-top: 8px;
+      margin-left: 8px;
+      /* 把格子横过来，且超出的格子，自动换行 */
+      float: left;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</html>
